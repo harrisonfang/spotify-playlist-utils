@@ -1,2 +1,2 @@
-# spotify-playlist-workflows
-Workflows for automatically managing my Spotify playlists.
+# spotify-playlist-utils
+Utilities for automatically managing my Spotify playlists.
