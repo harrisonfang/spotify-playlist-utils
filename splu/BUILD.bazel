@@ -13,4 +13,5 @@ py_library(
         ":__init__",
         "@pypi//spotipy:pkg",
     ],
+    visibility = ["//visibility:public"],
 )
