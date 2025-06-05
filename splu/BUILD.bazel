@@ -5,9 +5,11 @@ py_library(
     srcs = [
         "client.py",
         "iterate.py",
+        "lookup.py",
     ],
     deps = [
         "//splu/types",
+        "@pypi//cachetools:pkg",
         "@pypi//spotipy:pkg",
     ],
     visibility = ["//visibility:public"],
