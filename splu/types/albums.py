@@ -4,7 +4,7 @@ import logging
 from datetime import date, datetime
 from typing import Optional
 
-from pydantic import model_validator
+from pydantic import FieldSerializationInfo, field_serializer, model_validator
 
 from splu.types.artists import Artist
 from splu.types.base import SpluEnum, SpluType
@@ -24,6 +24,7 @@ class Album(SpluType):
     name: str
     release_date: Optional[date]
     release_date_precision: AlbumReleaseDatePrecision
+    release_date_raw: str
     total_tracks: int
     uri: str
 
@@ -44,7 +45,13 @@ class Album(SpluType):
                 parsed_release_date = None
 
         data["release_date"] = parsed_release_date
+        data["release_date_raw"] = release_date
+
         return data
+
+    @field_serializer("release_date")
+    def serialize_release_date(self, release_date: date, info: FieldSerializationInfo):
+        return self.release_date_raw
 
 
 class AlbumType(SpluEnum):
@@ -59,3 +66,18 @@ class AlbumReleaseDatePrecision(SpluEnum):
     DAY = "day"
     MONTH = "month"
     YEAR = "year"
+
+
+class SavedAlbum(SpluType):
+    added_at: datetime
+    added_at_raw: str
+    album: Album
+
+    @model_validator(mode="before")
+    def parse_added_at(cls, data):
+        data["added_at_raw"] = data["added_at"]
+        return data
+
+    @field_serializer("added_at")
+    def serialize_added_at(self, added_at: datetime, info: FieldSerializationInfo):
+        return self.added_at_raw

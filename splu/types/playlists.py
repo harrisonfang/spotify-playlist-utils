@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-from datetime import datetime
-from typing import Optional
-
 from splu.types.base import SpluType
 from splu.types.images import Image
-from splu.types.tracks import Track
+from splu.types.tracks import SavedTrack, Track
 from splu.types.users import User
 
 
@@ -24,11 +21,9 @@ class Playlist(SpluType):
     uri: str
 
 
-class PlaylistTrack(SpluType):
-    added_at: datetime
+class PlaylistTrack(SavedTrack):
     added_by: User
     is_local: bool
-    track: Track
 
 
 class PlaylistTracks(SpluType):
