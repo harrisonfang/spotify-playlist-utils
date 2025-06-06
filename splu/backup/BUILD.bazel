@@ -1,0 +1,17 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_binary(
+    name = "backup",
+    main = "main.py",
+    srcs = [
+        "albums.py",
+        "main.py",
+        "playlists.py",
+        "tracks.py",
+    ],
+    deps = [
+        "//splu",
+        "//splu/types",
+        "@pypi//spotipy:pkg",
+    ],
+)
