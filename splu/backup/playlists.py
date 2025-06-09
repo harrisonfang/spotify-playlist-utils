@@ -49,7 +49,6 @@ _PLAYLIST_TRACK_FIELDS = cast(
             "duration_ms": True,
             "explicit": True,
             "name": True,
-            "popularity": True,
         },
     },
 )
